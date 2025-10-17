@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/your-cafe/static/css/main.85442780.css",
+    "main.css": "/your-cafe/static/css/main.f438aabc.css",
     "main.js": "/your-cafe/static/js/main.45e67fa6.js",
     "index.html": "/your-cafe/index.html",
-    "main.85442780.css.map": "/your-cafe/static/css/main.85442780.css.map",
+    "main.f438aabc.css.map": "/your-cafe/static/css/main.f438aabc.css.map",
     "main.45e67fa6.js.map": "/your-cafe/static/js/main.45e67fa6.js.map"
   },
   "entrypoints": [
-    "static/css/main.85442780.css",
+    "static/css/main.f438aabc.css",
     "static/js/main.45e67fa6.js"
   ]
 }
