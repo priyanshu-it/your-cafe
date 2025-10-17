@@ -1,10 +1,11 @@
 // Firebase client SDK setup
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged,
-} from 'firebase/auth';
-import { getFirestore, collection, addDoc, query, where, getDocs, doc, updateDoc, deleteDoc, } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
-// ✅ Use REACT_APP_ prefix — this is required in Create React App
+import { getFirestore, collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+
+
+// ✅ Use REACT_APP_ prefix — required in Create React App
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -19,5 +20,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Export everything you need
-export { auth, signInWithEmailAndPassword, signOut, onAuthStateChanged, db, collection, addDoc, query, where, getDocs, doc, updateDoc, deleteDoc};
+
+// ✅ Export everything you need
+export {
+  auth, signInWithEmailAndPassword, signOut, onAuthStateChanged, db,
+  collection, addDoc, query, where, getDocs, getDoc, doc, updateDoc, deleteDoc
+};

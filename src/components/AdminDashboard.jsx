@@ -171,15 +171,20 @@ function AdminDashboard() {
                 <td>{order.createdAt}</td>
                 <td>{order.status}</td>
                 <td>
-                  <select
-                    value={order.status}
-                    onChange={(e) => updateStatus(order.id, e.target.value)}
-                  >
-                    <option value="preparing">Preparing</option>
-                    <option value="received">Received</option>
-                    <option value="ready">Ready</option>
-                    <option value="delivered">Delivered</option>
-                  </select>
+                  {order.status === 'Delivered' ? (
+                    <select>
+                      <option value="delivered">Delivered</option>
+                    </select>
+                  ) : (
+                    <select
+                      value={order.status}
+                      onChange={(e) => updateStatus(order.id, e.target.value)}
+                    >
+                      <option value="preparing">Preparing</option>
+                      <option value="received">Received</option>
+                      <option value="ready">Ready</option>
+                    </select>
+                  )}
                   {/* <button onClick={() => deleteOrder(order.id)} style={{ marginLeft: 8 }} >
                     Delete
                   </button> */}

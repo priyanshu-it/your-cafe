@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { auth, signInWithEmailAndPassword } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import AdminDelivery from './AdminDelivery';
 
 function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -21,22 +22,25 @@ function AdminLogin() {
   };
 
   return (
-    <div className="container">
-      <h2>Admin Login</h2>
-      {error && <p className="error">{error}</p>}
+    <div>
+      <div className="container">
+        <h2>Admin Login</h2>
+        {error && <p className="error">{error}</p>}
 
-      <form onSubmit={handleLogin}>
-        <label> Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your email' required/>
-        </label>
+        <form onSubmit={handleLogin}>
+          <label> Email:
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Enter your email' required />
+          </label>
 
-        <label> Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='At least 6 characters' required />
-        </label>
+          <label> Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='At least 6 characters' required />
+          </label>
 
-        <button type="submit">Log-In <i class="fa fa-sign-in"></i></button>
-      </form>
-    </div>
+          <button type="submit">Log-In <i class="fa fa-sign-in"></i></button>
+        </form>
+      </div >
+        <AdminDelivery />
+    </div >
   );
 }
 export default AdminLogin;

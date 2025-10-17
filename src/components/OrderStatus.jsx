@@ -24,14 +24,18 @@ function OrderStatus() {
       const snapshot = await getDocs(q);
       const results = snapshot.docs.map((doc) => {
         const data = doc.data();
-        return {
-          id: doc.id,
-          ...data,
-          createdAt: data.createdAt?.toDate
-            ? data.createdAt.toDate().toLocaleString()
-            : 'N/A',
-        };
+        const id = doc.id;
+        const createdAt = data.createdAt?.toDate
+          ? data.createdAt.toDate().toLocaleString()
+          : 'N/A';
+
+        // Add computed pin_id field
+        const numericPart = parseInt(id.replace(/\D/g, ''), 10);
+        const pin_id = isNaN(numericPart) ? 'N/A' : numericPart * 2;
+
+        return { id, ...data, createdAt, pin_id };
       });
+
       setOrders(results);
       if (results.length === 0) {
         setError('No orders found for given info.');
@@ -49,12 +53,12 @@ function OrderStatus() {
       <form onSubmit={fetchOrders}>
         <label>
           UserName:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter your name' required />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" required />
         </label>
 
         <label>
           Phone Number:
-          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder='Enter your phone number' required />
+          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" required />
         </label>
 
         <button type="submit" disabled={loading}>
@@ -76,17 +80,24 @@ function OrderStatus() {
             </tr>
           </thead>
           <tbody>
-            {orders.map(({ id, cart, status, address, createdAt }) => (
+            {orders.map(({ id, pin_id, cart, status, address, createdAt }) => (
               <tr key={id}>
-                <td onClick={() => navigator.clipboard.writeText(id)}
-                  style={{ cursor: 'pointer', textDecoration: 'underline' }} title="📝 Click to copy">{id}
+                <td
+                  onClick={() => navigator.clipboard.writeText(id)}
+                  style={{ cursor: 'pointer', textDecoration: 'underline' }} title="📝 Click to copy" >
+                  {id}
+                  <br />
+                  <td onClick={() => navigator.clipboard.writeText(pin_id)}
+                    style={{ cursor: 'pointer', fontWeight: '600', }} title="📝 Click to copy" >
+                    Pin id: {pin_id}
+                  </td>
                 </td>
                 <td>{address}</td>
                 <td>
                   <ul>
                     {cart &&
                       Object.entries(cart).map(([itemId, qty]) => {
-                        const product = products.find(p => p.id === itemId);
+                        const product = products.find((p) => p.id === itemId);
                         return (
                           <li key={itemId}>
                             {product ? product.name : itemId}: {qty}
@@ -96,8 +107,10 @@ function OrderStatus() {
                   </ul>
                 </td>
                 <td>{createdAt}</td>
-                <td>{status} <br/> {status === 'ready' ? '15-20 min' : ''}</td>
-
+                <td> {status}
+                  <br />
+                  {status === 'ready' ? '15-20 min' : ''}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -106,4 +119,5 @@ function OrderStatus() {
     </div>
   );
 }
+
 export default OrderStatus;

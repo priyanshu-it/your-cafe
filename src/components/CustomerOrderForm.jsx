@@ -80,7 +80,7 @@ function CustomerOrderForm() {
       <div className="container-edit">
         <a
           style={{ textDecoration: 'none', backgroundColor: isHovered ? 'teal' : '#444', color: '#fff', padding: '8px', 
-            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', bottom: '14px', right: '10px', zIndex: 1000, 
+            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '100px', right: '10px', zIndex: 1000, 
             boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
           }}
           href="#pin-d"
@@ -90,7 +90,7 @@ function CustomerOrderForm() {
           Cart <i className="fa fa-bell"></i>
           {cartItemCount > 0 && (
             <span style={{
-              position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px',
+              position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
               backgroundColor: isHovered ? ' ' : 'teal', borderRadius: '48%', padding: '3px 6px'
             }} >
               { isHovered ? ' ' : cartItemCount }
