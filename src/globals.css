@@ -11,7 +11,7 @@
   --heading-color: #1f4037;
 }
 
-/* ===== Reset & Base ===== */
+/* ===== Start of Reset & Base ===== */
 * {
   box-sizing: border-box;
 }
@@ -324,7 +324,6 @@ table tbody tr:hover {
   .container,
   .container-edit {
     padding: 1rem;
-    margin: 0.5rem;
     border-radius: 6px;
   }
 
@@ -389,4 +388,5 @@ table tbody tr:hover {
     font-size: 0.95rem;
   }
 }
+
 /* ===== End of globals.css ===== */
