@@ -295,19 +295,23 @@ table tbody tr:hover {
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
 
-  /* Stack nav items vertically */
+  /* Navbar */
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0.8rem;
     padding: 16px;
   }
 
+  .navbar-logo {
+    width: 100%;
+    text-align: center;
+  }
+
   .navbar-links {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
     width: 100%;
+    gap: 0.6rem;
   }
 
   .navbar a,
@@ -316,18 +320,21 @@ table tbody tr:hover {
     text-align: center;
   }
 
-
+  /* Containers */
+  .container,
   .container-edit {
-    padding: 0.1rem;
+    padding: 1rem;
     margin: 0.5rem;
+    border-radius: 6px;
   }
 
+  /* Forms */
   form {
     gap: 1rem;
   }
 
   fieldset {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem;
   }
 
   input,
@@ -337,6 +344,13 @@ table tbody tr:hover {
   .btn {
     width: 100%;
     font-size: 1rem;
+  }
+
+  /* Tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   table th,
@@ -350,21 +364,29 @@ table tbody tr:hover {
     text-align: center;
   }
 
+  /* Product Cards */
+  .product-card {
+    padding: 0.8rem 1rem;
+  }
+
   .product-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.4rem;
   }
 
   .product-qty {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.3rem;
   }
 
-  .product-card h3 {
+  .product-name {
     font-size: 1rem;
   }
 
-  .product-card p {
-    font-size: 0.9rem;
+  .product-price {
+    font-size: 0.95rem;
   }
 }
+/* ===== End of globals.css ===== */

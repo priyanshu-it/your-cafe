@@ -33,12 +33,12 @@ It’s designed for cafés and small restaurants looking to expand their digital
 ### ✅ Prerequisites
 
 Make sure you have the following installed:
-- **Node.js** (>= 14.x)
+- **Node.js** 
 - **npm** or **yarn**
 
 ### 📦 Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-cafe.git
+   git clone https://github.com/priyanshu-it/your-cafe.git
    cd your-cafe
