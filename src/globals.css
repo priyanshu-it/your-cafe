@@ -42,8 +42,8 @@ body {
 
 /* ===== Navigation ===== */
 .navbar {
-  background: linear-gradient(to right, #777, var(--primary-dark));
-  padding: 12px 20px;
+  background: linear-gradient(to right, teal, var(--primary-dark));
+  padding: 11px 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -52,28 +52,28 @@ body {
 }
 
 .navbar-logo {
-  font-size: 1.4em;
+  font-size: 1.5em;
   font-weight: bold;
 }
 
 .navbar-links {
   display: flex;
-  gap: 28px;
+  gap: 14px;
   align-items: center;
 }
 
 .navbar a {
   color: white;
-  background-color: var(--primary);
   text-decoration: none;
   font-weight: 500;
-  padding: 6px 10px;
+  padding: 4px 10px;
   border-radius: 6px;
   transition: background 0.2s;
 }
 
 .navbar a:hover {
-  background: rgb(140, 204, 140);
+  background: linear-gradient(to right, var(--primary), teal);
+  border: 1px solid snow;
   color: snow;
   font-weight: 700;
 }
@@ -145,7 +145,7 @@ select:focus {
 button,
 .btn {
   align-self: flex-start;
-  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  background: linear-gradient(to right, teal, var(--primary-dark));
   color: white;
   padding: 10px 20px;
   font-weight: 700;
@@ -305,7 +305,7 @@ table tbody tr:hover {
 
   .navbar-logo {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .navbar-links {
@@ -317,7 +317,7 @@ table tbody tr:hover {
   .navbar a,
   .logout-btn {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   /* Containers */

@@ -36,9 +36,9 @@ export default function App() {
           ) : (
             <>
               <Link to="/"><i class="fa fa-home"></i> Home Page</Link>
-              <Link to="/status"><i class="fa fa-status"></i> Order Status</Link>
-              <Link to="https://github.com/priyanshu-it">Content-Us</Link>
-              <Link to="/admin-login">Admin Login</Link>
+              <Link to="/status"><i class="fa fa-exclamation"></i> Order Status</Link>
+              <Link to="https://github.com/priyanshu-it"><i class="fa fa-phone"></i> Content-Us</Link>
+              <Link to="/admin-login"><i class="fa fa-user"></i> Admin Login</Link>
             </>
           )}
         </div>

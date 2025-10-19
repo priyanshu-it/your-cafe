@@ -79,8 +79,9 @@ function CustomerOrderForm() {
     <>
       <div className="container-edit">
         <a
-          style={{ textDecoration: 'none', backgroundColor: isHovered ? 'teal' : '#444', color: '#fff', padding: '8px', 
-            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '100px', right: '10px', zIndex: 1000, 
+          style={{
+            textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
+            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '130px', right: '10px', zIndex: 1000,
             boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
           }}
           href="#pin-d"
@@ -91,9 +92,9 @@ function CustomerOrderForm() {
           {cartItemCount > 0 && (
             <span style={{
               position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
-              backgroundColor: isHovered ? ' ' : 'teal', borderRadius: '48%', padding: '3px 6px'
+              backgroundColor: isHovered ? ' ' : 'red', borderRadius: '48%', padding: '3px 6px'
             }} >
-              { isHovered ? ' ' : cartItemCount }
+              {isHovered ? ' ' : cartItemCount}
             </span>
           )}
         </a>
@@ -113,7 +114,7 @@ function CustomerOrderForm() {
                     </div>
                     <div className="product-qty">
                       <b>Quantity:</b>
-                      <select value={qty} onChange={(e) => handleQtyChange(id, parseInt(e.target.value, 10) || 0) } >
+                      <select value={qty} onChange={(e) => handleQtyChange(id, parseInt(e.target.value, 10) || 0)} >
                         {[...Array(11).keys()].map((n) => (
                           <option key={n} value={n}>
                             {n}
@@ -129,30 +130,32 @@ function CustomerOrderForm() {
               })}
             </div>
 
-            <div className="order-total" style={{ flexDirection: 'column' }}>
-              <div style={{ textAlign: 'left', marginBottom: '10px' }}>
-                <strong>Items:</strong>
-                <ul>
-                  {products
-                    .filter(({ id }) => cart[id])
-                    .map(({ id, name, price }) => {
-                      const qty = cart[id];
-                      return (
-                        <li key={id} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0'}} >
-                          <span>{name} x {qty}</span>
-                          <span>₹{(qty * price).toFixed(2)}</span>
-                        </li>
-                      );
-                    })}
-                </ul>
+            <div className="order-total" style={{ flexDirection: 'column', zIndex: 1000 }}>
+              <fieldset>
+                <div style={{ textAlign: 'left', marginBottom: '10px' }}>
+                  <strong>* Items:</strong>
+                  <ul>
+                    {products
+                      .filter(({ id }) => cart[id])
+                      .map(({ id, name, price }) => {
+                        const qty = cart[id];
+                        return (
+                          <li key={id} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }} >
+                            <span>{name} x {qty}</span>
+                            <span>₹{(qty * price).toFixed(2)}</span>
+                          </li>
+                        );
+                      })}
+                  </ul>
 
-              </div>
-              <strong>
-                Item(s) Price: ₹{orderTotal.toFixed(2)} <br />
-                Delivery Charge: ₹{DELIVERY_CHARGE.toFixed(2)}
-                <hr />
-                * Order Total Price: ₹{(orderTotal + DELIVERY_CHARGE).toFixed(2)}
-              </strong>
+                </div>
+                <strong>
+                  Item(s) Price: ₹{orderTotal.toFixed(2)} <br />
+                  Delivery Charge: ₹{DELIVERY_CHARGE.toFixed(2)}
+                  <hr />
+                  * Order Total Price: ₹{(orderTotal + DELIVERY_CHARGE).toFixed(2)}
+                </strong>
+              </fieldset>
             </div>
           </fieldset>
 
@@ -182,8 +185,8 @@ function CustomerOrderForm() {
         </form>
       </div>
 
-      <footer style={{ textAlign: 'center', padding: '0', backgroundColor: '#f5f5f5', color: '#333' }}>
-        <p>© 2025 ☕ Your Cafe. Developed By Priyanshu, All rights reserved.</p>
+      <footer style={{ textAlign: 'center', padding: '0', fontSize: '14px', backgroundColor: '#f5f5f5', color: '#333' }}>
+        <p>© 2025 ☕ Your Cafe - Developed By Priyanshu <br /> All rights reserved.</p>
       </footer>
     </>
   );
