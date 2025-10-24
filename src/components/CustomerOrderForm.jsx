@@ -15,10 +15,7 @@ function CustomerOrderForm() {
   const [isHovered, setIsHovered] = useState(false);
 
   const cartItemCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-  const orderTotal = products.reduce(
-    (sum, { id, price }) => sum + (cart[id] || 0) * price,
-    0
-  );
+  const orderTotal = products.reduce( (sum, { id, price }) => sum + (cart[id] || 0) * price, 0 );
 
   useEffect(() => {
     document.title = cartItemCount > 0
@@ -78,26 +75,28 @@ function CustomerOrderForm() {
   return (
     <>
       <div className="container-edit">
-        <a
-          style={{
-            textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
-            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '110px', right: '10px', zIndex: 1000,
-            boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
-          }}
-          href="#pin-d"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          Cart <i className="fa fa-bell"></i>
-          {cartItemCount > 0 && (
-            <span style={{
-              position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
-              backgroundColor: isHovered ? ' ' : 'red', borderRadius: '48%', padding: '3px 6px'
-            }} >
+        {cartItemCount > 0 && (
+          <a
+            style={{
+              textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
+              borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '110px', right: '10px', 
+              zIndex: 1000, boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
+            }}
+            href="#pin-d"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            Cart <i className="fa fa-bell"></i>
+            <span
+              style={{
+                position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
+                backgroundColor: isHovered ? ' ' : 'red', borderRadius: '48%', padding: '3px 6px'
+              }}
+            >
               {isHovered ? ' ' : cartItemCount}
             </span>
-          )}
-        </a>
+          </a>
+        )}
 
         <h2>Place Your Order</h2>
         <form onSubmit={handleSubmit}>
@@ -134,15 +133,21 @@ function CustomerOrderForm() {
               <fieldset>
                 <div style={{ textAlign: 'left', marginBottom: '10px' }}>
                   <strong>* Items:</strong>
+
                   <ul>
                     {products
                       .filter(({ id }) => cart[id])
                       .map(({ id, name, price }) => {
                         const qty = cart[id];
                         return (
-                          <li key={id} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }} >
+                          <li key={id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '4px 0', gap: '10px' }} >
                             <span>{name} x {qty}</span>
-                            <span>₹{(qty * price).toFixed(2)}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span>₹{(qty * price).toFixed(2)}</span>
+                              <button onClick={() => handleQtyChange(id, 0)} style={{ margin: '0', padding: '2px 6px' }}>
+                                <i className="fa fa-trash"></i>
+                              </button>
+                            </div>
                           </li>
                         );
                       })}
@@ -191,4 +196,5 @@ function CustomerOrderForm() {
     </>
   );
 }
+
 export default CustomerOrderForm;

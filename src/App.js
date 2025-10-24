@@ -13,6 +13,7 @@ import { auth, onAuthStateChanged, signOut } from './firebase';
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -21,24 +22,34 @@ export default function App() {
     return unsubscribe;
   }, []);
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <Router>
       <nav className="navbar">
         <div className="navbar-logo">☕ Your Café</div>
-        <div className="navbar-links">
+
+        <div className="menu-icon" onClick={toggleMenu}>
+          <i className={menuOpen ? "fa fa-times" : "fa fa-bars"}></i>
+        </div>
+
+        <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
           {user ? (
             <>
-              <Link to="/admin">Admin Dashboard</Link>
-              <button className="logout-btn" onClick={() => signOut(auth)}>
-                Log-Out <i class="fa fa-sign-out"></i>
+              <Link to="/admin" onClick={closeMenu}>Admin Dashboard</Link>
+              <button className="logout-btn" onClick={() => { signOut(auth); closeMenu(); }}>
+                Log-Out <i className="fa fa-sign-out"></i>
               </button>
             </>
           ) : (
             <>
-              <Link to="/"><i class="fa fa-home"></i> Home Page</Link>
-              <Link to="/status"><i class="fa fa-exclamation"></i> Order Status</Link>
-              <Link to="https://github.com/priyanshu-it"><i class="fa fa-phone"></i> Content-Us</Link>
-              <Link to="/admin-login"><i class="fa fa-user"></i> Admin Login</Link>
+              <Link to="/" onClick={closeMenu}><i className="fa fa-home"></i> Home Page</Link>
+              <Link to="/status" onClick={closeMenu}><i className="fa fa-exclamation"></i> Order Status</Link>
+              <a href="https://github.com/priyanshu-it" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>
+                <i className="fa fa-phone"></i> Contact-Us
+              </a>
+              <Link to="/admin-login" onClick={closeMenu}><i className="fa fa-user"></i> Admin Login</Link>
             </>
           )}
         </div>
