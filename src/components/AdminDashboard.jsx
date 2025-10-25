@@ -64,7 +64,7 @@ function AdminDashboard() {
         const price = product ? product.price : 0;
         const total = price * qty;
 
-        return `<li>${name}: ${qty} × ${(price).toFixed(2)} = ${(total).toFixed(2)}</li>`;
+        return `<li>${name}: ${qty} × ${(price).toFixed(2)} = ₹${(total).toFixed(2)}</li>`;
       })
       .join('');
 
@@ -86,26 +86,32 @@ function AdminDashboard() {
             .total { font-weight: bold; margin-top: 10px; }
           </style>
         </head>
-        <body>
+        <body><div className="navbar-logo">☕ Your Café</div>
           <h2 style="text-align: center; color: #2c3e50; border-bottom: 2px solid #2980b9; padding-bottom: 8px; margin-bottom: 20px;">
-            Order Slip
+            Food Order Slip
           </h2>
+          <h3 style="color: #34495e;">Customer Details:</h3>
           <p><strong>Order ID:</strong> ${order.id}</p>
           <p><strong>Customer:</strong> ${order.name}</p>
           <p><strong>Phone:</strong> ${order.phone}</p>
           <p><strong>Address:</strong> ${order.address}</p>
           <p><strong>Time:</strong> ${order.createdAt}</p>
+          <h3 style="margin-top: 20px; color: #34495e;">Order Details:</h3>
           <ul>
             ${orderItems}
           </ul>
-            <p style="font-weight: bold; margin-top: 15px; font-size: 16px; color: #27ae60; border-top: 2px solid #27ae60; padding-top: 10px;">
-               Delivery: ₹18 + Total: ${orderTotal}
+          <ul>
+            <li>Delivery: ₹18</li>
+          </ul>
+            <p style="font-weight: bold; margin-top: 15px; font-size: 18px; text-align: right; 
+            color: #27ae60; border-top: 2px solid #27ae60; padding-top: 10px;">
+                Total Amount: ₹${orderTotal}
             </p>
         </body>
       </html>
     `;
 
-    const printWindow = window.open('', '', 'width=600,height=800');
+    const printWindow = window.open('', '_blank');
     printWindow.document.write(slipHtml);
     printWindow.document.close();
     printWindow.focus();
@@ -176,10 +182,8 @@ function AdminDashboard() {
                       <option value="delivered">Delivered</option>
                     </select>
                   ) : (
-                    <select
-                      value={order.status}
-                      onChange={(e) => updateStatus(order.id, e.target.value)}
-                    >
+                    <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}>
+                      
                       <option value="preparing">Preparing</option>
                       <option value="received">Received</option>
                       <option value="ready">Ready</option>
