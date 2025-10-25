@@ -44,7 +44,7 @@ export default function App() {
             </>
           ) : (
             <>
-              <Link to="/" onClick={closeMenu}><i className="fa fa-home"></i> Home Page</Link>
+              <Link to="/your-cafe" onClick={closeMenu}><i className="fa fa-home"></i> Home Page</Link>
               <Link to="/status" onClick={closeMenu}><i className="fa fa-exclamation"></i> Order Status</Link>
               <a href="https://github.com/priyanshu-it" target="_blank" rel="noopener noreferrer" onClick={closeMenu}>
                 <i className="fa fa-phone"></i> Contact-Us
