@@ -57,7 +57,7 @@ export default function App() {
 
       <div className="content">
         <Routes>
-          <Route path="/" element={<CustomerOrderForm />} />
+          <Route path="/your-cafe" element={<CustomerOrderForm />} />
           <Route path="/status" element={<OrderStatus />} />
           <Route
             path="/admin-login"
