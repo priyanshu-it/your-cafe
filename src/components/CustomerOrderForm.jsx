@@ -76,22 +76,20 @@ function CustomerOrderForm() {
     <>
       <div className="container-edit">
         {cartItemCount > 0 && (
-          <a
-            style={{
-              textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
-              borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '110px', right: '10px',
-              zIndex: 1000, boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
-            }}
+          <a style={{
+            textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
+            borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '100px', right: '2rem',
+            zIndex: 1000, boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
+          }}
             href="#pin-d"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             Cart <i className="fa fa-bell"></i>
-            <span
-              style={{
-                position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
-                backgroundColor: isHovered ? ' ' : 'red', borderRadius: '48%', padding: '3px 6px'
-              }}
+            <span style={{
+              position: 'absolute', top: '-5px', right: '-5px', fontSize: '12px', fontWeight: '900',
+              backgroundColor: isHovered ? ' ' : 'red', borderRadius: '48%', padding: '3px 6px'
+            }}
             >
               {isHovered ? ' ' : cartItemCount}
             </span>
@@ -129,38 +127,78 @@ function CustomerOrderForm() {
               })}
             </div>
 
-            <div className="order-total" style={{ position: 'relative', overflow: 'visible', backgroundColor: 'white', zIndex: '1000' }}>
-              <fieldset>
-                <div style={{ textAlign: 'left', marginBottom: '10px' }}>
-                  <strong>* Items:</strong>
+            <div id="pin-d" className="order-total" style={{ position: 'relative', overflow: 'visible', backgroundColor: 'white', zIndex: '1000' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ backgroundColor: '#f9f9f9' }}>
+                    <th style={{ textAlign: 'left', padding: '8px' }}>Item (Qty)</th>
+                    <th style={{ textAlign: 'right', padding: '8px' }}>Price / Action</th>
+                  </tr>
 
-                  <ul>
-                    {products
-                      .filter(({ id }) => cart[id])
-                      .map(({ id, name, price }) => {
-                        const qty = cart[id];
-                        return (
-                          <li key={id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '4px 0', gap: '10px' }} >
-                            <span>{name} x {qty}</span>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              <span>₹{(qty * price).toFixed(2)}</span>
-                              <button onClick={() => handleQtyChange(id, 0)} style={{ margin: '0', padding: '2px 6px' }}>
-                                <i className="fa fa-trash"></i>
-                              </button>
-                            </div>
-                          </li>
-                        );
-                      })}
-                  </ul>
+                </thead>
+                <tbody>
+                  {products
+                    .filter(({ id }) => cart[id])
+                    .map(({ id, name, price }) => {
+                      const qty = cart[id];
+                      return (
+                        <tr key={id} style={{ borderBottom: '1px solid #ddd' }}>
 
-                </div>
-                <strong>
-                  Item(s) Price: ₹{orderTotal.toFixed(2)} <br />
-                  Delivery Charge: ₹{DELIVERY_CHARGE.toFixed(2)}
-                  <hr />
-                  * Order Total Price: ₹{(orderTotal + DELIVERY_CHARGE).toFixed(2)}
-                </strong>
-              </fieldset>
+                          {/* ITEM + QTY */}
+                          <td style={{ padding: '8px' }}>
+                            {name} <strong style={{ color: '#555' }}>x {qty}</strong>
+                          </td>
+
+                          {/* PRICE + ACTION */}
+                          <td style={{ textAlign: 'right', padding: '8px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '8px' }}>
+                            <span>₹{(qty * price).toFixed(2)}</span>
+                            <button onClick={() => handleQtyChange(id, 0)} title="Remove item"
+                              style={{ margin: 0, padding: '4px 8px', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
+                            >
+                              <i className="fa fa-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                  <p style={{ margin: '0', color: '#999', textAlign: 'left' }}>
+                    ➡
+                  </p>
+
+                  {/* Subtotal */}
+                  <tr style={{ backgroundColor: '#fafafa' }}>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>
+                      <strong>Item(s) Price:</strong>
+                    </td>
+                    <td style={{ textAlign: 'right', padding: '8px' }}>
+                      ₹{orderTotal.toFixed(2)}
+                    </td>
+                  </tr>
+
+                  {/* Delivery Charge */}
+                  <tr style={{ backgroundColor: '#fafafa' }}>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>
+                      <strong>Delivery Charge:</strong>
+                    </td>
+                    <td style={{ textAlign: 'right', padding: '8px' }}>
+                      ₹{DELIVERY_CHARGE.toFixed(2)}
+                    </td>
+                  </tr>
+
+                  {/* Total */}
+                  <tr style={{ backgroundColor: '#f1f1f1', borderTop: '2px solid #ccc' }}>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>
+                      <strong>Total Amount:</strong>
+                    </td>
+                    <td style={{ textAlign: 'right', padding: '8px' }}>
+                      <strong>₹{(orderTotal + DELIVERY_CHARGE).toFixed(2)}</strong>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
             </div>
           </fieldset>
 
@@ -168,7 +206,7 @@ function CustomerOrderForm() {
           {success && <p className="success">{success}</p>}
 
           <fieldset>
-            <legend id="pin-d">Your Information</legend>
+            <legend>Your Information</legend>
 
             <label> UserName / Name:
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" required />

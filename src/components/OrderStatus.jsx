@@ -31,7 +31,7 @@ function OrderStatus() {
 
         // Add computed pin_id field
         const numericPart = parseInt(id.replace(/\D/g, ''), 10);
-        const pin_id = isNaN(numericPart) ? 'N/A' : numericPart * 2;
+        const pin_id = isNaN(numericPart) ? 'N/A' : (numericPart * 2).toString().padStart(4, '0');
 
         return { id, ...data, createdAt, pin_id };
       });

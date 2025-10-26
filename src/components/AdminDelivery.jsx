@@ -10,13 +10,13 @@ function AdminDelivery() {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
 
-  // 🔹 Load all orders on mount
+  // Load all orders on mount
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const ordersRef = collection(db, "orders");
         const snapshot = await getDocs(ordersRef);
-        const orderList = snapshot.docs.map(doc => ({
+        const orderList = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -39,7 +39,7 @@ function AdminDelivery() {
     const ADMIN_PASSWORD = "admin123";
 
     try {
-      // 🔸 Check admin password
+      // 🔸 Verify admin password
       if (deliveryPassword !== ADMIN_PASSWORD) {
         setError("❌ Incorrect delivery password.");
         return;
@@ -47,11 +47,12 @@ function AdminDelivery() {
 
       // 🔸 Compute expected PIN
       const numericPart = parseInt(orderId.replace(/\D/g, ""), 10);
-      const orderNum = !isNaN(numericPart) ? numericPart : orderId.length;
-      const expectedPin = orderNum * 2;
+      const expectedPin = isNaN(numericPart)
+        ? "N/A"
+        : (numericPart * 2).toString().padStart(4, "0");
 
-      if (parseInt(pinId, 10) !== expectedPin) {
-        setError(`❌ Invalid PIN ID.`);
+      if (pinId !== expectedPin) {
+        setError("❌ Invalid PIN ID.");
         return;
       }
 
@@ -67,7 +68,9 @@ function AdminDelivery() {
       // 🔸 Update order status
       await updateDoc(orderRef, { status: "Delivered" });
 
-      setSuccess(`✅ Delivery verified for Order ID.`);
+      setSuccess(`✅ Delivery successfully for Order ID.`);
+      alert(`Delivery verified for Order ID: ${orderId}`);
+
     } catch (err) {
       console.error("Error updating delivery:", err);
       setError("⚠️ Failed to update delivery status.");
@@ -87,8 +90,8 @@ function AdminDelivery() {
           <option value="">-- Select Order ID --</option>
           {orders.map((order) => {
             const id = order.id;
-            const prefix = id.slice(0, 16); // show end 4 characters hide
-            const masked = `${prefix} XXXX`;
+            const prefix = id.slice(0, -4); // everything except last 4
+            const masked = `${prefix} - - - -`; // hide the last 4
             return (
               <option key={id} value={id}>
                 {masked}

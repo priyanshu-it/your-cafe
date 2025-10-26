@@ -38,7 +38,7 @@ body {
 }
 
 .container-edit {
-  max-width: 95rem;
+  max-width: 94rem;
 }
 
 /* ===== Navigation ===== */
@@ -102,7 +102,7 @@ form {
 
 fieldset {
   border: 1px solid #ddd;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
 }
 
@@ -249,15 +249,12 @@ select:focus {
 
 .product-total,
 .order-total {
-  margin-top: auto;
+  padding-top: 0.5rem;
   text-align: right;
   font-weight: 700;
   color: var(--success);
   font-size: 1.05rem;
   border-top: 2px dashed #ccc;
-  border-radius: 8px;
-  padding-top: 0.75rem;
-  margin-top: 0.75rem;
 }
 
 /* ===== Table ===== */
@@ -276,7 +273,7 @@ table td {
 }
 
 table th {
-  background-color: var(--primary);
+  background: linear-gradient(to bottom, var(--primary-dark), var(--primary));
   color: white;
   font-weight: 700;
 }
@@ -311,15 +308,15 @@ table tbody tr:hover {
   .navbar-links {
     display: none;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     border-top: 2px solid snow;
     position: absolute;
-    top: 60px;
-    right: 0;
+    top: 60px; right: 0;
     width: 300px;
     padding: 1rem 0.5rem;
     border-radius: 8px 0 8px 8px;
     animation: slideIn 0.3s ease forwards;
+    overflow: visible; z-index: 2000;
   }
 
   .navbar-links.active {
@@ -374,12 +371,14 @@ table tbody tr:hover {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+
   }
 
   table th,
   table td {
     font-size: 0.85rem;
     padding: 0.5rem;
+    width: 100%;
   }
 
   .section-title {
