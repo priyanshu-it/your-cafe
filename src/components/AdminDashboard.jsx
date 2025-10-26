@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import products from '../data/Products'; // adjust path as needed
-import { db, collection, getDocs, doc, updateDoc, /* deleteDoc */ } from '../firebase';
+import { db, collection, getDocs, doc, updateDoc } from '../firebase';
+
+const DELIVERY_CHARGE = 18;
 
 function AdminDashboard() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Fetch orders from Firestore
   const fetchOrders = async () => {
     setLoading(true);
     try {
@@ -33,6 +36,7 @@ function AdminDashboard() {
     fetchOrders();
   }, []);
 
+  // Update order status
   const updateStatus = async (id, status) => {
     try {
       const orderRef = doc(db, 'orders', id);
@@ -45,34 +49,23 @@ function AdminDashboard() {
     }
   };
 
-  // const deleteOrder = async (id) => {
-  //   if (!window.confirm('Are you sure to delete this order?')) return;
-  //   try {
-  //     await deleteDoc(doc(db, 'orders', id));
-  //     setOrders((prev) => prev.filter((o) => o.id !== id));
-  //   } catch (err) {
-  //     console.error('Failed to delete order:', err);
-  //   }
-  // };
-
-  // Function to print order slip
+  // Print order slip
   const printOrderSlip = (order) => {
     const orderItems = Object.entries(order.cart)
       .map(([itemId, qty]) => {
         const product = products.find((p) => p.id === itemId);
-        const name = product ? product.name : itemId;
-        const price = product ? product.price : 0;
-        const total = price * qty;
-
-        return `<li>${name}: ${qty} × ${(price).toFixed(2)} = ₹${(total).toFixed(2)}</li>`;
+        const price = product?.price || 0;
+        const name = product?.name || itemId;
+        return `<li>${name}: ${qty} × ₹${price.toFixed(2)} = ₹${(price * qty).toFixed(2)}</li>`;
       })
       .join('');
 
-    const orderTotal = Object.entries(order.cart).reduce((sum, [itemId, qty]) => {
+    const itemsTotal = Object.entries(order.cart).reduce((sum, [itemId, qty]) => {
       const product = products.find((p) => p.id === itemId);
-      const price = product ? product.price : 0;
-      return sum + 18 + price * qty;
-    }, 0).toFixed(2);
+      return sum + (product?.price || 0) * qty;
+    }, 0);
+
+    const orderTotal = (itemsTotal + DELIVERY_CHARGE).toFixed(2);
 
     const slipHtml = `
       <html>
@@ -80,10 +73,6 @@ function AdminDashboard() {
           <title>Order Slip</title>
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
-            h2 { text-align: center; }
-            ul { list-style: none; padding: 0; }
-            li { margin-bottom: 5px; }
-            .total { font-weight: bold; margin-top: 10px; }
           </style>
         </head>
         <body><div className="navbar-logo">☕ Your Café</div>
@@ -99,9 +88,7 @@ function AdminDashboard() {
           <h3 style="margin-top: 20px; color: #34495e;">Order Details:</h3>
           <ul>
             ${orderItems}
-          </ul>
-          <ul>
-            <li>Delivery: ₹18</li>
+            <li>Delivery: ₹${DELIVERY_CHARGE}</li>
           </ul>
             <p style="font-weight: bold; margin-top: 15px; font-size: 18px; text-align: right; 
             color: #27ae60; border-top: 2px solid #27ae60; padding-top: 10px;">
@@ -141,67 +128,63 @@ function AdminDashboard() {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order.id}>
-                <td>{order.id}</td>
-                <td>{order.name}</td>
-                <td>{order.phone}</td>
-                <td>{order.address}</td>
-                <td>
-                  <ul style={{ margin: 0, paddingLeft: 15 }}>
-                    {order.cart &&
-                      Object.entries(order.cart).map(([itemId, qty]) => {
-                        const product = products.find((p) => p.id === itemId);
-                        const name = product ? product.name : itemId;
-                        const price = product ? product.price : 0;
-                        const itemTotal = price * qty;
+            {orders.map((order) => {
+              const itemsTotal = Object.entries(order.cart).reduce((sum, [itemId, qty]) => {
+                const product = products.find((p) => p.id === itemId);
+                return sum + (product?.price || 0) * qty;
+              }, 0);
+              const orderTotal = (itemsTotal + DELIVERY_CHARGE).toFixed(2);
 
+              return (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.name}</td>
+                  <td>{order.phone}</td>
+                  <td>{order.address}</td>
+                  <td>
+                    <ul style={{ margin: 0, paddingLeft: 15 }}>
+                      {Object.entries(order.cart).map(([itemId, qty]) => {
+                        const product = products.find((p) => p.id === itemId);
+                        const price = product?.price || 0;
                         return (
                           <li key={itemId}>
-                            {name}: {qty} × {price.toFixed(2)} = {(itemTotal).toFixed(2)}
+                            {product?.name || itemId}: {qty} × ₹{price.toFixed(2)} = ₹{(price * qty).toFixed(2)}
                           </li>
                         );
                       })}
-                    <li style={{ fontWeight: 'bold', marginTop: 4 }}>
-                      Delivery: ₹18 + Total:{' '}
-                      {Object.entries(order.cart)
-                        .reduce((sum, [itemId, qty]) => {
-                          const product = products.find((p) => p.id === itemId);
-                          const price = product ? product.price : 0;
-                          return sum + 18 + price * qty;
-                        }, 0)
-                        .toFixed(2)}
-                    </li>
-                  </ul>
-                </td>
-                <td>{order.createdAt}</td>
-                <td>{order.status}</td>
-                <td>
-                  {order.status === 'Delivered' ? (
-                    <select>
-                      <option value="delivered">Delivered</option>
-                    </select>
-                  ) : (
-                    <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)}>
-                      
-                      <option value="preparing">Preparing</option>
-                      <option value="received">Received</option>
-                      <option value="ready">Ready</option>
-                    </select>
-                  )}
-                  {/* <button onClick={() => deleteOrder(order.id)} style={{ marginLeft: 8 }} >
-                    Delete
-                  </button> */}
-                  <button onClick={() => printOrderSlip(order)} style={{ marginLeft: 10 }} >
-                    <i class="fa fa-print"></i>
-                  </button>
-                </td>
-              </tr>
-            ))}
+                      <li style={{ fontWeight: 'bold', marginTop: 4 }}>
+                        Delivery: ₹{DELIVERY_CHARGE} + Total: ₹{orderTotal}
+                      </li>
+                    </ul>
+                  </td>
+                  <td>{order.createdAt}</td>
+                  <td>
+                   <b>{order.status}</b> <hr/>
+                    {order.status === 'Delivered' ? (
+                      <select disabled>
+                        <option>Delivered</option>
+                      </select>
+                    ) : (
+                      <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)} >
+                        <option value="Received">Received</option>
+                        <option value="Preparing">Preparing</option>
+                        <option value="Ready">Ready</option>
+                      </select>
+                    )}
+                  </td>
+                  <td>
+                    <button onClick={() => printOrderSlip(order)} style={{ marginLeft: 10 }}>
+                      <i className="fa fa-print"></i>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
     </div>
   );
 }
+
 export default AdminDashboard;
