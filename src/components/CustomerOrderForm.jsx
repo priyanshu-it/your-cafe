@@ -15,7 +15,7 @@ function CustomerOrderForm() {
   const [isHovered, setIsHovered] = useState(false);
 
   const cartItemCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-  const orderTotal = products.reduce( (sum, { id, price }) => sum + (cart[id] || 0) * price, 0 );
+  const orderTotal = products.reduce((sum, { id, price }) => sum + (cart[id] || 0) * price, 0);
 
   useEffect(() => {
     document.title = cartItemCount > 0
@@ -79,7 +79,7 @@ function CustomerOrderForm() {
           <a
             style={{
               textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '8px',
-              borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '110px', right: '10px', 
+              borderRadius: '100px', border: '3px solid skyblue', position: 'fixed', top: '110px', right: '10px',
               zIndex: 1000, boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s'
             }}
             href="#pin-d"
@@ -129,7 +129,7 @@ function CustomerOrderForm() {
               })}
             </div>
 
-            <div className="order-total" style={{ flexDirection: 'column', zIndex: 1000 }}>
+            <div className="order-total" style={{ position: 'relative', overflow: 'visible', backgroundColor: 'white', zIndex: '1000' }}>
               <fieldset>
                 <div style={{ textAlign: 'left', marginBottom: '10px' }}>
                   <strong>* Items:</strong>

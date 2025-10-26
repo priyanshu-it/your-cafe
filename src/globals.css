@@ -254,7 +254,8 @@ select:focus {
   font-weight: 700;
   color: var(--success);
   font-size: 1.05rem;
-  border-top: 1px dashed #ccc;
+  border-top: 2px dashed #ccc;
+  border-radius: 8px;
   padding-top: 0.75rem;
   margin-top: 0.75rem;
 }
