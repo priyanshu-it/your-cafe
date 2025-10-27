@@ -166,8 +166,8 @@ function AdminDashboard() {
                       </select>
                     ) : (
                       <select value={order.status} onChange={(e) => updateStatus(order.id, e.target.value)} >
-                        <option value="Received">Received</option>
                         <option value="Preparing">Preparing</option>
+                        <option value="Received">Received</option> 
                         <option value="Ready">Ready</option>
                       </select>
                     )}

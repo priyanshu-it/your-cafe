@@ -57,7 +57,7 @@ function App() {
           <Route path="/status" element={<OrderStatus />} />
           <Route path="/admin-login" element={!user ? <AdminLogin /> : <Navigate to="/admin" replace />} />
           <Route path="/admin" element={user ? <AdminDashboard /> : <Navigate to="/admin-login" replace />} />
-          <Route path="*" element={<Navigate to="/your-cafe" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
 
