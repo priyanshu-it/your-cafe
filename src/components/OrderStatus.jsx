@@ -100,7 +100,7 @@ function OrderStatus() {
                         const product = products.find((p) => p.id === itemId);
                         return (
                           <li key={itemId}>
-                            {product ? product.name : itemId}: {qty}
+                            {product ? product.name : itemId} x {qty}
                           </li>
                         );
                       })}

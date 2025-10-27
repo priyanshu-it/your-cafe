@@ -11,8 +11,7 @@
   --heading-color: #1f4037;
 }
 
-/* ===== Start of Reset & Base ===== */
-
+/* ===== Reset & Base ===== */
 * {
   box-sizing: border-box;
 }
@@ -26,19 +25,28 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+header {
+  text-align: center;
+  padding: 4rem 1rem 2rem;
+  background: linear-gradient(to bottom, #f5fffd, #ffffff);
+  z-index: 1500;
+  overflow: visible;
+  position: relative;
+}
+
 /* ===== Container ===== */
 .container,
 .container-edit {
   max-width: 740px;
   margin: 2rem auto;
   background: var(--card-bg);
-  padding: 2rem 2.5rem;
+  padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .container-edit {
-  max-width: 94rem;
+  max-width: 100%;
 }
 
 /* ===== Navigation ===== */
@@ -176,6 +184,21 @@ button:hover,
   margin-bottom: 1rem;
 }
 
+/* ===== Search Bar Styling ===== */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  margin: 1rem auto;
+  max-width: 500px;
+  background: white;
+  border-radius: 25px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* ===== Product Lists & Cards ===== */
 .product-list,
 .product-cards,
@@ -188,7 +211,7 @@ button:hover,
   margin-bottom: 2rem;
 }
 
-/* ===== Updated Product Card Styling ===== */
+/* ===== Product Card ===== */
 .product-card {
   background: #eaf8ea;
   border: 1px solid #d0e8d0;
@@ -273,7 +296,7 @@ table td {
 }
 
 table th {
-  background: linear-gradient(to bottom, var(--primary-dark), var(--primary));
+  background: teal;
   color: white;
   font-weight: 700;
 }
@@ -311,12 +334,14 @@ table tbody tr:hover {
     background: rgba(0, 0, 0, 0.8);
     border-top: 2px solid snow;
     position: absolute;
-    top: 60px; right: 0;
+    top: 60px;
+    right: 0;
     width: 300px;
     padding: 1rem 0.5rem;
     border-radius: 8px 0 8px 8px;
     animation: slideIn 0.3s ease forwards;
-    overflow: visible; z-index: 2000;
+    overflow: visible;
+    z-index: 2000;
   }
 
   .navbar-links.active {
@@ -371,7 +396,6 @@ table tbody tr:hover {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
-
   }
 
   table th,
@@ -384,6 +408,12 @@ table tbody tr:hover {
   .section-title {
     font-size: 1.25rem;
     text-align: center;
+  }
+
+  /* Search Bar */
+  .search-container {
+    width: 100%;
+    margin-top: 0.8rem;
   }
 
   /* Product Cards */
