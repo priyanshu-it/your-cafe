@@ -109,7 +109,7 @@ function OrderStatus() {
                 <td>{createdAt}</td>
                 <td> {status}
                   <br />
-                  {status === 'ready' ? '15-20 min' : ''}
+                  {status === 'Ready' ? '15-20 min' : ''}
                 </td>
               </tr>
             ))}
