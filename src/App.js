@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes, Route, Link, Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 
 import CustomerOrderForm from './components/CustomerOrderForm';
 import OrderStatus from './components/OrderStatus';
@@ -11,14 +8,12 @@ import AdminDashboard from './components/AdminDashboard';
 
 import { auth, onAuthStateChanged, signOut } from './firebase';
 
-export default function App() {
+function App() {
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => { setUser(currentUser); });
     return unsubscribe;
   }, []);
 
@@ -53,23 +48,21 @@ export default function App() {
             </>
           )}
         </div>
+
       </nav>
 
       <div className="content">
         <Routes>
           <Route path="/your-cafe" element={<CustomerOrderForm />} />
           <Route path="/status" element={<OrderStatus />} />
-          <Route
-            path="/admin-login"
-            element={!user ? <AdminLogin /> : <Navigate to="/admin" replace />}
-          />
-          <Route
-            path="/admin"
-            element={user ? <AdminDashboard /> : <Navigate to="/admin-login" replace />}
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/admin-login" element={!user ? <AdminLogin /> : <Navigate to="/admin" replace />} />
+          <Route path="/admin" element={user ? <AdminDashboard /> : <Navigate to="/admin-login" replace />} />
+          <Route path="*" element={<Navigate to="/your-cafe" replace />} />
         </Routes>
       </div>
+
     </Router>
   );
 }
+
+export default App;  // -- End of src/App.js --
