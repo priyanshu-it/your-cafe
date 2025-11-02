@@ -89,7 +89,7 @@ function CustomerOrderForm() {
           fresh ingredients, amazing taste.
         </p>
 
-        <div style={{display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem'}} >
+        <div style={{display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem'  }} >
           <a
             style={{
               textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
@@ -105,7 +105,7 @@ function CustomerOrderForm() {
               textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
               borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
             }}
-            href='#chef-ai'
+            href='https://your-chef-ai.vercel.app/'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
