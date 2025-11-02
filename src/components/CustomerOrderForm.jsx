@@ -105,7 +105,7 @@ function CustomerOrderForm() {
               textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
               borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
             }}
-            href='https://your-chef-ai.vercel.app/'
+            href='https://your-chef-ai.vercel.app'
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
