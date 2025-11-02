@@ -89,7 +89,7 @@ function CustomerOrderForm() {
           fresh ingredients, amazing taste.
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
+        <div style={{display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
           <a
             style={{
               textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
