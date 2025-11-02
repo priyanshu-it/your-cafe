@@ -13,7 +13,7 @@ function CustomerOrderForm() {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(''); // 🔍 Search term state
+  const [searchTerm, setSearchTerm] = useState(''); // 🔍
 
   const cartItemCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
   const orderTotal = products.reduce((sum, { id, price }) => sum + (cart[id] || 0) * price, 0);
