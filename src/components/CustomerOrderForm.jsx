@@ -81,7 +81,7 @@ function CustomerOrderForm() {
           Delicious Food,{' '}
           <span style={{ color: 'teal' }}>Delivered Fresh</span>
         </h1>
-        
+
         <p style={{
           maxWidth: '600px', margin: '0 auto', color: '#555', fontSize: '1.1rem'
         }}>
@@ -278,7 +278,7 @@ function CustomerOrderForm() {
         </form>
       </div>
 
-      <footer style={{ textAlign: 'center', padding: '0', fontSize: '14px', backgroundColor: '#f5f5f5', color: '#333', }} >
+      <footer style={{textAlign: 'center', padding: '0', fontSize: '14px', backgroundColor: '#f5f5f5', color: '#333',}} >
         <p>
           © 2025 ☕ Your Cafe - Developed By Priyanshu <br /> All rights reserved.
         </p>
