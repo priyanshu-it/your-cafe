@@ -81,22 +81,38 @@ function CustomerOrderForm() {
           Delicious Food,{' '}
           <span style={{ color: 'teal' }}>Delivered Fresh</span>
         </h1>
+        
         <p style={{
           maxWidth: '600px', margin: '0 auto', color: '#555', fontSize: '1.1rem'
         }}>
           Order from our wide selection of beverages, snacks, and main courses. Fast delivery,
           fresh ingredients, amazing taste.
         </p>
-        <a style={{
-          display: 'inline-block', marginTop: '1.5rem', textDecoration: 'none', backgroundColor: 'teal', color: '#fff',
-          padding: '12px 24px', fontSize: '1.2rem', borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
-        }}
-          href='#linkedin'
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          Order Place
-        </a>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
+          <a
+            style={{
+              textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
+              borderRadius: '24px', boxShadow: '0 0 8px #0077ff', transition: 'background 0.2s, box-shadow 0.2s',
+            }}
+            href='#linkedin'
+          >
+            <i className="fa fa-cutlery"></i> Order Now
+          </a>
+
+          <a
+            style={{
+              textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
+              borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
+            }}
+            href='https://your-chef-ai.vercel.app/'
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <i className="fa fa-arrow-right"></i> Try Chef AI
+          </a>
+        </div>
+
       </header>
 
       {/* 🔹 ORDER FORM SECTION */}
