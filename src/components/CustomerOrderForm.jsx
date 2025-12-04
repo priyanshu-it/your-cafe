@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { db, collection, addDoc } from '../firebase';
 import products from '../data/Products'; // Update path if needed
 
@@ -76,7 +77,7 @@ function CustomerOrderForm() {
   return (
     <>
       {/* 🔹 HEADER + SEARCH BAR */}
-       <header>
+      <header>
         <h1 style={{ fontSize: '2.8rem', fontWeight: '700', marginBottom: '1rem' }}>
           Delicious Food,{' '}
           <span style={{ color: 'teal' }}>Delivered Fresh</span>
@@ -89,9 +90,9 @@ function CustomerOrderForm() {
           fresh ingredients, amazing taste.
         </p>
 
-        <div style={{display: 'flex', justifyContent: 'center', gap: '1.9rem', marginTop: '1.5rem'}}>
-          <a
-            style={{
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.9rem', marginTop: '1.5rem' }}>
+
+          <a style={{
               textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
               borderRadius: '24px', boxShadow: '0 0 8px #0077ff', transition: 'background 0.2s, box-shadow 0.2s',
             }}
@@ -100,17 +101,16 @@ function CustomerOrderForm() {
             <i className="fa fa-cutlery"></i> Order Now
           </a>
 
-          <a
-            style={{
+          <Link style={{
               textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
               borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
             }}
-            href='/status'
+            to="/status"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             <i className="fa fa-arrow-right"></i> Order Status
-          </a>
+          </Link>
         </div>
 
       </header>
@@ -278,7 +278,7 @@ function CustomerOrderForm() {
         </form>
       </div>
 
-      <footer style={{textAlign: 'center', padding: '0', fontSize: '14px', backgroundColor: '#f5f5f5', color: '#333'}} >
+      <footer style={{ textAlign: 'center', padding: '0', fontSize: '14px', backgroundColor: '#f5f5f5', color: '#333' }} >
         <p>
           © 2025 ☕ Your Cafe - Developed By Priyanshu <br /> All rights reserved.
         </p>
