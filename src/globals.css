@@ -241,6 +241,38 @@ button:hover,
   color: teal;
 }
 
+.product-type {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+  text-align: center;
+  width: fit-content;
+}
+
+/* Veg */
+.product-type.veg {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+}
+
+/* Non-Veg */
+.product-type.non-veg {
+  background-color: #fdecea;
+  color: #c62828;
+  border: 1px solid #c62828;
+}
+
+/* All / Drink */
+.product-type.drink {
+  background-color: #fff8e1;
+  color: #f9a825;
+  border: 1px solid #f9a825;
+}
+
+
 .product-price {
   font-size: 1rem;
   font-weight: 500;

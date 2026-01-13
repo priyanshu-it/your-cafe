@@ -93,18 +93,18 @@ function CustomerOrderForm() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1.9rem', marginTop: '1.5rem' }}>
 
           <a style={{
-              textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
-              borderRadius: '24px', boxShadow: '0 0 8px #0077ff', transition: 'background 0.2s, box-shadow 0.2s',
-            }}
+            textDecoration: 'none', backgroundColor: 'teal', color: '#fff', padding: '12px 24px', fontSize: '1.1rem',
+            borderRadius: '24px', boxShadow: '0 0 8px #0077ff', transition: 'background 0.2s, box-shadow 0.2s',
+          }}
             href='#linkedin'
           >
             <i className="fa fa-cutlery"></i> Order Now
           </a>
 
           <Link style={{
-              textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
-              borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
-            }}
+            textDecoration: 'none', color: 'teal', border: '2px solid teal', padding: '12px 24px', fontSize: '1.1rem',
+            borderRadius: '24px', boxShadow: isHovered ? '0 0 8px #0077ff' : undefined, transition: 'background 0.2s, box-shadow 0.2s',
+          }}
             to="/status"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -150,14 +150,16 @@ function CustomerOrderForm() {
             <div className="products-grid">
               {products
                 .filter(({ name }) => name.toLowerCase().includes(searchTerm.toLowerCase()))
-                .map(({ id, name, price }) => {
+                .map(({ id, name, price, type, need, description }) => {
                   const qty = cart[id] || 0;
                   return (
                     <div key={id} className="product-card">
+                      <div className={`product-type ${type}`}>{type} {need}</div>
                       <div className="product-header">
                         <div className="product-name">{name}</div>
                         <div className="product-price">₹{price.toFixed(2)}</div>
                       </div>
+                      <div>{description}</div>
                       <div className="product-qty">
                         <b>Quantity:</b>
                         <select
@@ -227,7 +229,7 @@ function CustomerOrderForm() {
                   {/* Delivery Charge */}
                   <tr style={{ backgroundColor: '#fafafa' }}>
                     <td style={{ textAlign: 'left', padding: '8px' }}>
-                      <strong>Delivery Charge:</strong>
+                      <strong>Delivery & Service Charge:</strong>
                     </td>
                     <td style={{ textAlign: 'right', padding: '8px' }}>
                       ₹{DELIVERY_CHARGE.toFixed(2)}
