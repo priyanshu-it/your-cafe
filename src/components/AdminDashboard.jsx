@@ -159,7 +159,7 @@ function AdminDashboard() {
                   </td>
                   <td>{order.createdAt}</td>
                   <td>
-                   <b>{order.status}</b> <hr/>
+                    <b>{order.status}</b> <hr />
                     {order.status === 'Delivered' ? (
                       <select disabled>
                         <option>Delivered</option>
