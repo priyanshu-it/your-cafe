@@ -1,8 +1,7 @@
 # ☕ Your Café – Online Food Ordering System
 
 Welcome to **Your Café**, a modern web-based food ordering platform built with **React**.  
-This application allows customers to browse menu items, customize their orders, and place online food orders seamlessly.  
-It’s designed for cafés and small restaurants looking to expand their digital presence.
+This application allows customers to browse menu items, customize their orders, and place online food orders seamlessly.
 
 ---
 
