@@ -28,7 +28,7 @@ const products = [
   { id: 'meal_01', name: 'Paneer Sandwich', price: 70, type: 'veg', description: '2 bread slices' },
   { id: 'meal_02', name: 'Egg Sandwich', price: 80, type: 'non-veg', description: '2 bread slices' },
   { id: 'meal_03', name: 'Veg Biryani', price: 90, type: 'veg', description: '500 gm plate' },
-  { id: 'meal_04', name: 'Chicken Biryani', price: 120, type: 'non-veg', description: '500 gm plate'},
+  { id: 'meal_04', name: 'Chicken Biryani', price: 120, type: 'non-veg', description: '500 gm plate' },
 
   // Combos
   {
